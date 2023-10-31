@@ -1,0 +1,37 @@
+<%- include('layout/header') %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mt-4">
+                <div class="card shadow">
+                    <div class="card-header bg-success">
+                        <h5 class="text-light">Sửa blog
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="/update/<%= blog._id %>" method="post" id="add-form"
+                            enctype="application/x-www-form-urlencoded">
+                            <div class="mb-3">
+                                <label for="name">Họ tên</label>
+                                <input type="text" name="name" class="form-control form-control-lg"
+                                    value="<%= blog.name %>" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="mssv">MSSV</label>
+                                <input type="number" name="mssv" class="form-control form-control-lg"
+                                    value="<%= blog.mssv %>" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="mess">Blog</label>
+                                <input type="text" name="mess" class="form-control form-control-lg"
+                                    value="<%= blog.mess %>" required />
+                            </div>
+                            <div class="mb-3 d-grid">
+                                <input type="submit" name="submit" value="Sửa blog" class="btn btn-success btn-lg" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('layout/footer') %>

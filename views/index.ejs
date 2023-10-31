@@ -1,0 +1,80 @@
+<%- include('layout/header') %>
+
+    <div class="container">
+        <div>
+            <h1>Tìm kiếm blog</h1>
+            <form id="form_search">
+                <input type="text" name="keyword" placeholder="Nhập từ khóa tìm kiếm" id="search_box">
+                <input type="button" value="Tìm kiếm" id="btn_search">
+            </form>
+            <h6>Từ khóa: Họ tên</h6>
+        </div>
+        <div class="row my-4">
+            <div class="col-log-12">
+                <table class="table-responsive">
+                    <% if (blogs !='' ) { %>
+                        <table class="table table-striped text-center my-3">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th>STT</th>
+                                    <th>Họ tên</th>
+                                    <th>MSSV</th>
+                                    <th>Blog</th>
+                                    <th>Tùy chọn</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% blogs.forEach((row, index)=> { %>
+                                    <tr class="align-middle">
+                                        <td>
+                                            <%= index %>
+                                        </td>
+                                        <td class="name_table">
+                                            <%= row.name %>
+                                        </td>
+                                        <td>
+                                            <%= row.mssv %>
+                                        </td>
+                                        <td>
+                                            <%= row.mess %>
+                                        </td>
+                                        <td>
+                                            <a href="/edit/<%= row._id %>" class="text-success"><i
+                                                    class="fas fa-edit fa-lg mx-1"></i></a>
+                                            <a href="/delete/<%= row._id %>" class="text-danger"><i
+                                                    class="fas fa-trash fa-lg mx-1"></i></a>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                        <% } else { %>
+                            <h1 class="text-center text-secondary mt-5">No users</h1>
+                            <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        const btn_search = document.querySelector('#btn_search');
+        const tableName = document.querySelectorAll('.name_table');
+        const search = document.querySelector("#search_box")
+        const tbody = document.querySelector('tbody');
+        const name_user = [];
+        tableName.forEach(element => {
+            name_user.push(element.textContent.trim());
+        });
+
+        btn_search.onclick = function () {
+            const index = name_user.findIndex((item) => search.value === item);
+            const item = tableName[index].parentElement;
+
+            tbody.innerHTML = "";
+            tbody.appendChild(item);
+        }
+
+
+
+    </script>
+
+    <%- include('layout/footer') %>
